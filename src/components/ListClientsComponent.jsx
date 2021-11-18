@@ -6,21 +6,28 @@ class ListClientsComponent extends Component{
         super(props);
 
         this.state = {
-
             clients :[]
-
         }
+        this.addClient = this.addClient.bind(this);
     }
+
     componentDidMount() {
         ClientService.getClients().then((res) => {
             this.setState({clients: res.data})
-        })
+        });
+    }
+
+    addClient(){
+        this.props.history.push('/add-client');
     }
 
     render() {
         return (
             <div>
-                <h2 className= "text-center"> Client List</h2>
+                <h2 className= "text-center">Client List</h2>
+                <div className="row">
+                    <button className="btn btn-primary" onClick={this.addClient}>Add Client</button>
+                </div>
                 <div className="row">
                     <table className="table table-striped table-bordered">
                         <thead>
